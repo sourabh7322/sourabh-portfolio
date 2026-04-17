@@ -51,10 +51,10 @@ const Hero = () => {
       {/* Background Aurora */}
       <div className="absolute inset-0 z-0">
         <SoftAurora 
-          color1="#0f0c29" // dark deep
-          color2="#302b63" // purpleish
-          brightness={0.8}
-          speed={0.4}
+          color1="#4c1d95" 
+          color2="#e100ff" 
+          brightness={1.2}
+          speed={0.5}
         />
       </div>
 

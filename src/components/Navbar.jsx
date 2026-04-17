@@ -16,41 +16,44 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Experience', href: '#experience' },
   ];
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-        scrolled ? 'glass py-4' : 'bg-transparent py-6'
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full border border-white/10 ${
+        scrolled 
+          ? 'bg-black/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-3 px-8' 
+          : 'bg-white/5 backdrop-blur-md py-4 px-10'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary">
-          Portfolio.
+      <div className="flex items-center gap-8 md:gap-12">
+        <a href="#" className="font-bold text-white text-lg tracking-wide hidden md:block">
+          <span className="text-brand-primary">M</span>ax
         </a>
-        <div className="hidden md:flex space-x-8">
+        
+        <div className="flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide"
+              className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide relative group"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand-primary to-brand-secondary transition-all group-hover:w-full" />
             </a>
           ))}
         </div>
-        <div className="md:hidden">
-          {/* Mobile menu button could go here */}
-          <button className="text-gray-300 focus:outline-none">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+
+        <a 
+          href="#contact" 
+          className="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-semibold px-5 py-2 rounded-full transition-all"
+        >
+          Contact
+        </a>
       </div>
     </motion.nav>
   );
