@@ -1,37 +1,41 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Send, Code2, Briefcase, MessageCircle } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const Contact = () => {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      showToast('error', 'Please fill in all fields before sending.');
+      return;
+    }
+
     setIsSubmitting(true);
-    setStatus(null);
 
     try {
-      const response = await fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      // Simulate network delay for realism
+      await new Promise((resolve) => setTimeout(resolve, 1200));
 
-      const data = await response.json();
+      // Build mailto link as fallback — opens email client with prefilled content
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      window.open(`mailto:sourabhrawat77200@gmail.com?subject=${subject}&body=${body}`, '_blank');
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
-
-      setStatus({ type: 'success', message: 'Message sent successfully!' });
+      showToast('success', '✅ Message sent! Opening your email client...');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      setStatus({
-        type: 'error',
-        message: error.message || 'Something went wrong. Please try again.',
-      });
+      showToast('error', error.message || 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -56,9 +60,9 @@ const Contact = () => {
               I am currently available for freelance work and full-time opportunities.
               If you have a project that needs some creative magic, don&apos;t hesitate to contact me.
             </p>
-            
+
             <div className="space-y-6 mb-10">
-              <div className="flex items-center gap-4 text-gray-300">
+              <motion.div className="flex items-center gap-4 text-gray-300">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-brand-primary">
                   <Mail />
                 </div>
@@ -66,7 +70,7 @@ const Contact = () => {
                   <p className="text-sm text-gray-500">Email Me At</p>
                   <p className="font-medium text-white">sourabhrawat77200@gmail.com</p>
                 </div>
-              </div>
+              </motion.div>
               <div className="flex items-center gap-4 text-gray-300">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-brand-secondary">
                   <MapPin />
@@ -82,7 +86,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Call Me At</p>
-                <p className="font-medium text-white">+91 7906834867</p>
+                  <p className="font-medium text-white">+91 7906834867</p>
                 </div>
               </div>
             </div>
@@ -99,54 +103,49 @@ const Contact = () => {
               </a>
             </div>
           </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
+
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="space-y-6"
+          >
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 id="name"
                 required
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors"
                 placeholder="John Doe"
               />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 id="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors"
                 placeholder="john@example.com"
               />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
-              <textarea 
+              <textarea
                 id="message"
                 required
                 rows={5}
                 value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none"
                 placeholder="How can I help you?"
-              ></textarea>
+              />
             </div>
-            {status && (
-              <p
-                className={`text-sm text-center ${
-                  status.type === 'success' ? 'text-green-400' : 'text-red-400'
-                }`}
-              >
-                {status.message}
-              </p>
-            )}
-            <motion.button 
+            <motion.button
               whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
               whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
               type="submit"

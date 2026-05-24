@@ -81,10 +81,14 @@ export const handler = async (event) => {
     };
   } catch (error) {
     console.error('Failed to send email:', error);
+    const errorMessage =
+      error.code === 'EAUTH'
+        ? 'Gmail rejected the login. Use a Gmail App Password in EMAIL_APP_PASSWORD, not your regular Gmail password.'
+        : 'Failed to send message. Please try again later.';
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Failed to send message. Please try again later.' }),
+      body: JSON.stringify({ error: errorMessage }),
     };
   }
 };
