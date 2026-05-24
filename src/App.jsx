@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import { ReactLenis } from 'lenis/react';
 
 import SplashCursor from './components/SplashCursor';
 import Navbar from './components/Navbar';
@@ -9,6 +10,7 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import ParticlesBackground from './components/ParticlesBackground';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -50,38 +52,48 @@ const App = () => {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white relative flex flex-col items-center overflow-x-hidden selection:bg-brand-primary/30 selection:text-white">
-      {/* Global Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary z-50 origin-left"
-        style={{ scaleX }}
-      />
-      
-      {/* Global Interactive Cursor */}
-      <SplashCursor 
-        COLOR="#A855F7"
-        SPLAT_RADIUS={0.2}
-        VELOCITY_DISSIPATION={2}
-        DENSITY_DISSIPATION={3.5}
-      />
-      
-      <Navbar />
-      
-      <main className="w-full flex flex-col items-center w-full">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
-      </main>
+    <ReactLenis
+      root
+      options={{
+        lerp: 0.05,        // smoother & slower (default: 0.1)
+        smoothWheel: true, // smooth mouse wheel (default: true)
+      }}
+    >
+      <div className="bg-[#050505] min-h-screen text-white relative flex flex-col items-center selection:bg-brand-primary/30 selection:text-white">
+        <ParticlesBackground />
 
-      {/* Footer */}
-      <footer className="w-full py-8 text-center text-gray-500 text-sm border-t border-white/10 mt-12 bg-black/20">
-        &copy; {new Date().getFullYear()} MaxByte. Built with React & Tailwind.
-      </footer>
-    </div>
+        {/* Global Scroll Progress Bar */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary z-50 origin-left"
+          style={{ scaleX }}
+        />
+
+        {/* Global Interactive Cursor */}
+        <SplashCursor
+          COLOR="#A855F7"
+          SPLAT_RADIUS={0.2}
+          VELOCITY_DISSIPATION={2}
+          DENSITY_DISSIPATION={3.5}
+        />
+
+        <Navbar />
+
+        <main className="relative z-10 w-full flex flex-col items-center">
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Contact />
+        </main>
+
+        <footer className="relative z-10 w-full py-8 text-center text-gray-500 text-sm border-t border-white/10 mt-12 bg-black/20">
+          &copy; {new Date().getFullYear()} Sourabh Rawat. All Rights Reserved. Built with React & Tailwind.
+        </footer>
+      </div>
+    </ReactLenis>
   );
+
 };
 
 export default App;

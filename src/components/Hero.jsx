@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Download } from 'lucide-react';
-import SoftAurora from './SoftAurora';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
 
 const TypingEffect = ({ words }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -46,18 +46,10 @@ const TypingEffect = ({ words }) => {
 };
 
 const Hero = () => {
-  return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Aurora */}
-      <div className="absolute inset-0 z-0">
-        <SoftAurora 
-          color1="#4c1d95" 
-          color2="#e100ff" 
-          brightness={1.2}
-          speed={0.5}
-        />
-      </div>
+  const { handleAnchorClick } = useSmoothScroll();
 
+  return (
+    <section className="relative z-10 w-full h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -76,7 +68,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight"
         >
-          Hi, I&apos;m <span className="text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary">MaxByte</span>
+          Hi, I&apos;m <span className="text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary">Sourabh Rawat</span>
         </motion.h1>
 
         <motion.div 
@@ -94,8 +86,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <motion.a 
+          <motion.a
             href="#projects"
+            onClick={(e) => handleAnchorClick(e, '#projects')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 bg-gradient-to-r from-brand-primary to-brand-secondary px-8 py-3 rounded-full text-white font-semibold shadow-[0_0_20px_rgba(168,85,247,0.4)]"
@@ -103,8 +96,9 @@ const Hero = () => {
             View Projects <ArrowRight size={18} />
           </motion.a>
           
-          <motion.a 
+          <motion.a
             href="#contact"
+            onClick={(e) => handleAnchorClick(e, '#contact')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 glass px-8 py-3 rounded-full text-white font-semibold hover:bg-white/10 transition-colors"

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { handleAnchorClick } = useSmoothScroll();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,8 +33,12 @@ const Navbar = () => {
       }`}
     >
       <div className="flex items-center gap-8 md:gap-12">
-        <a href="#" className="font-bold text-white text-lg tracking-wide hidden md:block">
-          <span className="text-brand-primary">M</span>ax
+        <a
+          href="#"
+          onClick={(e) => handleAnchorClick(e, '#')}
+          className="font-bold text-white text-lg tracking-wide hidden md:block"
+        >
+          <span className="text-brand-primary">H</span>ome
         </a>
         
         <div className="flex items-center gap-6">
@@ -40,6 +46,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleAnchorClick(e, link.href)}
               className="text-gray-300 hover:text-white transition-colors text-sm font-medium tracking-wide relative group"
             >
               {link.name}
@@ -48,8 +55,9 @@ const Navbar = () => {
           ))}
         </div>
 
-        <a 
-          href="#contact" 
+        <a
+          href="#contact"
+          onClick={(e) => handleAnchorClick(e, '#contact')}
           className="bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-semibold px-5 py-2 rounded-full transition-all"
         >
           Contact

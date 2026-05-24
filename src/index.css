@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @theme {
   --color-dark-surface: #111116;
@@ -22,16 +23,36 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: initial;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #050505;
+  /* background-color: #050505; */
   color: #ededed;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Custom scrollbar */

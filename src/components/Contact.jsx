@@ -4,12 +4,37 @@ import { Mail, MapPin, Phone, Send, Code2, Briefcase, MessageCircle } from 'luci
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submit
-    alert('Message sent successfully!');
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setStatus({ type: 'success', message: 'Message sent successfully!' });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: error.message || 'Something went wrong. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -39,7 +64,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Email Me At</p>
-                  <p className="font-medium text-white">hello@maxbyte.dev</p>
+                  <p className="font-medium text-white">sourabhrawat77200@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-gray-300">
@@ -48,7 +73,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Location</p>
-                  <p className="font-medium text-white">San Francisco, CA</p>
+                  <p className="font-medium text-white">Bangaluru, Karnataka, India</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-gray-300">
@@ -57,7 +82,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Call Me At</p>
-                  <p className="font-medium text-white">+1 (555) 123-4567</p>
+                <p className="font-medium text-white">+91 7906834867</p>
                 </div>
               </div>
             </div>
@@ -112,13 +137,23 @@ const Contact = () => {
                 placeholder="How can I help you?"
               ></textarea>
             </div>
+            {status && (
+              <p
+                className={`text-sm text-center ${
+                  status.type === 'success' ? 'text-green-400' : 'text-red-400'
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
             <motion.button 
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
               type="submit"
-              className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Send Message <Send size={18} />
+              {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={18} />
             </motion.button>
           </form>
         </div>

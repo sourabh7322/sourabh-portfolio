@@ -2,21 +2,15 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
-    role: 'Senior Full Stack Developer',
-    company: 'Tech Innovators Inc.',
-    year: '2022 - Present',
-    description: 'Led a team of developers in building a hyper-scalable SaaS platform. Improved performance by 40% using modern React practices and optimized API architecture.',
+    role: 'Full Stack Developer',
+    company: 'Creware Technologies',
+    year: 'January2025 - Present',
+    description: 'Developed scalable and performant full-stack web applications using React,Next js,  Node.js, Express.js, Nest js and MongoDB, PostgreSQL. Built responsive user interfaces, integrated REST APIs, managed backend logic, and collaborated closely with UI/UX designers to deliver smooth user experiences.',
   },
   {
-    role: 'Frontend Engineer',
-    company: 'Creative Web Studio',
-    year: '2020 - 2022',
-    description: 'Developed highly interactive and performant web applications using React and Framer Motion. Collaborated closely with UI/UX designers.',
-  },
-  {
-    role: 'Web Developer Intern',
-    company: 'Startup Hub',
-    year: '2019 - 2020',
+    role: 'Full Stack Developer Intern',
+    company: 'Badho',
+    year: 'August 2024 - September 2024',   
     description: 'Assisted in the development of several progressive web apps. Gained hands-on experience in full-stack JavaScript environments.',
   },
 ];
