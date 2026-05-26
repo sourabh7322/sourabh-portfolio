@@ -38,45 +38,6 @@ const projects = [
       accentColor: '#D4AF37',
     },
   },
-  {
-    title: 'Image Adjuster Online',
-    description:
-      'Effortless, professional-grade photo color grading. Upload your image, make adjustments, and download without any hassle. Built using NextJS, Typescript & TailwindCSS.',
-    image:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
-    live: '#',
-    theme: {
-      leftBg: 'bg-gradient-to-br from-[#1C1236] to-[#120A24]',
-      rightBg: 'bg-gradient-to-br from-[#5339A6] to-[#25134A]',
-      accentColor: '#8B5CF6',
-    },
-  },
-  {
-    title: 'Modern Rajab Maintenance and Construction Co.',
-    description:
-      'Designed and developed a website for Modern Rajab Maintenance & Construction Co., a top UAE contracting company.',
-    image:
-      'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80',
-    live: '#',
-    theme: {
-      leftBg: 'bg-gradient-to-br from-[#9D2320] to-[#450C0A]',
-      rightBg: 'bg-gradient-to-br from-[#260C0A] to-[#140404]',
-      accentColor: '#EF4444',
-    },
-  },
-  {
-    title: 'Fix My Office',
-    description:
-      'Designed and developed the front end for Fix My Office, a UAE-based office solutions company. Created a modern, responsive interface that effectively showcases their services, enhancing user engagement and accessibility.',
-    image:
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-    live: '#',
-    theme: {
-      leftBg: 'bg-gradient-to-br from-[#120E28] to-[#0A0717]',
-      rightBg: 'bg-gradient-to-br from-[#30267D] to-[#120D3E]',
-      accentColor: '#3B82F6',
-    },
-  },
 ];
 
 const CARD_COUNT = projects.length;
