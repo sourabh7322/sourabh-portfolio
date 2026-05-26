@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const projects = [
   {
@@ -11,6 +12,8 @@ const projects = [
     theme: {
       leftBg: 'bg-gradient-to-br from-[#0F2A24] to-[#071612]',
       rightBg: 'bg-gradient-to-br from-[#14532D] to-[#052E16]',
+      lightLeftBg: 'bg-gradient-to-br from-[#ecfdf5] to-[#d1fae5]',
+      lightRightBg: 'bg-gradient-to-br from-[#f0fdf4] to-[#bbf7d0]',
       accentColor: '#22C55E',
     },
   },
@@ -23,6 +26,8 @@ const projects = [
     theme: {
       leftBg: 'bg-gradient-to-br from-[#1A1A2E] to-[#0F0F1A]',
       rightBg: 'bg-gradient-to-br from-[#2563EB] to-[#1E3A8A]',
+      lightLeftBg: 'bg-gradient-to-br from-[#eef2ff] to-[#e0e7ff]',
+      lightRightBg: 'bg-gradient-to-br from-[#eff6ff] to-[#bfdbfe]',
       accentColor: '#3B82F6',
     },
   },
@@ -35,6 +40,8 @@ const projects = [
     theme: {
       leftBg: 'bg-gradient-to-br from-[#2A1F0E] to-[#1A1208]',
       rightBg: 'bg-gradient-to-br from-[#B8860B] to-[#8B6914]',
+      lightLeftBg: 'bg-gradient-to-br from-[#fffbeb] to-[#fef3c7]',
+      lightRightBg: 'bg-gradient-to-br from-[#fef9c3] to-[#fde68a]',
       accentColor: '#D4AF37',
     },
   },
@@ -44,14 +51,16 @@ const CARD_COUNT = projects.length;
 
 const SEGMENT = 1 / CARD_COUNT;
 
-const ProgressDot = ({ index, progress }) => {
+const ProgressDot = ({ index, progress, isDark }) => {
   const enterStart = index * SEGMENT;
   const enterMid = enterStart + SEGMENT * 0.5;
 
   const backgroundColor = useTransform(
     progress,
     [enterStart, enterMid],
-    ['rgba(255,255,255,0.2)', 'rgba(255,255,255,0.9)'],
+    isDark
+      ? ['rgba(255,255,255,0.2)', 'rgba(255,255,255,0.9)']
+      : ['rgba(208,1,27,0.2)', 'rgba(208,1,27,0.95)'],
     { clamp: true }
   );
 
@@ -63,7 +72,7 @@ const ScrollHint = ({ progress }) => {
 
   return (
     <motion.div className="w-full flex justify-center select-none pointer-events-none">
-      <motion.span className="text-white/30 text-xs tracking-widest uppercase animate-bounce" style={{ opacity }}>
+      <motion.span className="text-foreground/30 text-xs tracking-widest uppercase animate-bounce" style={{ opacity }}>
         scroll
       </motion.span>
     </motion.div>
@@ -71,7 +80,24 @@ const ScrollHint = ({ progress }) => {
 };
 
 const Card = ({ i, title, description, image, live, theme, progress }) => {
+  const { isDark } = useTheme();
   const isEven = i % 2 === 0;
+
+  const textPanelBg = isDark
+    ? isEven
+      ? theme.leftBg
+      : theme.rightBg
+    : isEven
+      ? theme.lightLeftBg
+      : theme.lightRightBg;
+
+  const imagePanelBg = isDark
+    ? isEven
+      ? theme.rightBg
+      : theme.leftBg
+    : isEven
+      ? theme.lightRightBg
+      : theme.lightLeftBg;
 
   const enterStart = i * SEGMENT;
   const enterEnd = (i + 1) * SEGMENT;
@@ -109,28 +135,43 @@ const Card = ({ i, title, description, image, live, theme, progress }) => {
       style={{ y, scale, opacity, visibility, pointerEvents, zIndex: i + 1 }}
       className="absolute inset-0 mx-auto flex w-full max-w-7xl items-center justify-center px-4 md:px-12"
     >
-      <div className={`w-full h-[520px] md:h-[450px] rounded-[24px] md:rounded-[32px] overflow-hidden flex flex-col ${
+      <div
+        className={`relative flex h-[520px] w-full flex-col overflow-hidden rounded-[24px] border border-border md:h-[450px] md:rounded-[32px] ${
           isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-        } border border-white/10 shadow-[0_30px_70px_rgba(0,0,0,0.85)] relative`}
+        } ${isDark ? 'shadow-[0_30px_70px_rgba(0,0,0,0.85)]' : 'shadow-[var(--glass-shadow)]'}`}
       >
         <div
-          className={`w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center items-start relative overflow-hidden ${
-            isEven ? theme.leftBg : theme.rightBg
-          }`}
+          className={`relative flex w-full flex-col items-start justify-center overflow-hidden p-8 md:w-1/2 md:p-16 ${textPanelBg}`}
         >
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent pointer-events-none" />
+          <div
+            className={`pointer-events-none absolute top-0 left-0 h-px w-full bg-gradient-to-r to-transparent ${
+              isDark ? 'from-white/10' : 'from-black/5'
+            }`}
+          />
 
-          <h3 className="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight leading-[1.15]">
+          <h3
+            className={`mb-6 text-3xl font-extrabold leading-[1.15] tracking-tight md:text-5xl ${
+              isDark ? 'text-white' : 'text-foreground'
+            }`}
+          >
             {title}
           </h3>
 
-          <p className="text-gray-300/90 text-sm md:text-base mb-8 leading-relaxed max-w-lg font-light">
+          <p
+            className={`mb-8 max-w-lg text-sm leading-relaxed font-light md:text-base ${
+              isDark ? 'text-white/80' : 'text-muted'
+            }`}
+          >
             {description}
           </p>
 
           <a
             href={live}
-            className="group inline-flex items-center gap-2 text-sm md:text-base font-semibold text-white/95 hover:text-white transition-all duration-300 cursor-pointer pointer-events-auto border-b border-transparent hover:border-white pb-0.5"
+            className={`group pointer-events-auto inline-flex cursor-pointer items-center gap-2 border-b pb-0.5 text-sm font-semibold transition-all duration-300 md:text-base ${
+              isDark
+                ? 'border-transparent text-white hover:border-white'
+                : 'border-transparent text-brand-primary hover:border-brand-primary'
+            }`}
           >
             View Site{' '}
             <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">
@@ -140,18 +181,28 @@ const Card = ({ i, title, description, image, live, theme, progress }) => {
         </div>
 
         <div
-          className={`w-full md:w-1/2 p-6 md:p-12 flex items-center justify-center relative overflow-hidden ${
-            isEven ? theme.rightBg : theme.leftBg
-          }`}
+          className={`relative flex w-full items-center justify-center overflow-hidden p-6 md:w-1/2 md:p-12 ${imagePanelBg}`}
         >
-          <div className="w-full h-full max-h-[220px] md:max-h-[300px] bg-black/40 rounded-2xl border border-white/10 p-3 md:p-4 flex flex-col shadow-2xl backdrop-blur-md relative z-10 transition-transform duration-500 hover:scale-[1.02]">
-            <div className="flex items-center gap-1.5 pb-2.5 md:pb-3 border-b border-white/5 mb-2.5 md:mb-3 select-none">
+          <div
+            className={`relative z-10 flex h-full max-h-[220px] w-full flex-col rounded-2xl border p-3 shadow-2xl backdrop-blur-md transition-transform duration-500 hover:scale-[1.02] md:max-h-[300px] md:p-4 ${
+              isDark ? 'border-white/10 bg-black/40' : 'border-border bg-white/90'
+            }`}
+          >
+            <div
+              className={`mb-2.5 flex select-none items-center gap-1.5 border-b pb-2.5 md:mb-3 md:pb-3 ${
+                isDark ? 'border-white/5' : 'border-border'
+              }`}
+            >
               <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
             </div>
 
-            <div className="flex-1 w-full overflow-hidden rounded-lg border border-white/5 relative">
+            <div
+              className={`relative w-full flex-1 overflow-hidden rounded-lg border ${
+                isDark ? 'border-white/5' : 'border-border'
+              }`}
+            >
               <img
                 src={image}
                 alt={title}
@@ -160,7 +211,9 @@ const Card = ({ i, title, description, image, live, theme, progress }) => {
             </div>
           </div>
 
-          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+          <div
+            className={`pointer-events-none absolute inset-0 ${isDark ? 'bg-black/10' : 'bg-white/20'}`}
+          />
         </div>
       </div>
     </motion.div>
@@ -168,6 +221,7 @@ const Card = ({ i, title, description, image, live, theme, progress }) => {
 };
 
 const Projects = () => {
+  const { isDark } = useTheme();
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -186,13 +240,13 @@ const Projects = () => {
     >
       <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-12 md:py-16">
         <div className="w-full max-w-7xl mx-auto px-4 md:px-12 flex items-center select-none z-20">
-          <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-widest uppercase">
+          <h2 className="text-xl md:text-2xl font-extrabold text-foreground tracking-widest uppercase">
             PROJECTS
           </h2>
-          <div className="h-[2px] flex-1 bg-white/10 mx-6" />
+          <div className="mx-6 h-[2px] flex-1 bg-border" />
           <div className="flex gap-2">
             {projects.map((_, i) => (
-              <ProgressDot key={i} index={i} progress={scrollYProgress} />
+              <ProgressDot key={i} index={i} progress={scrollYProgress} isDark={isDark} />
             ))}
           </div>
         </div>

@@ -10,11 +10,14 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import ParticlesBackground from './components/ParticlesBackground';
+import BackgroundLayer from './components/BackgroundLayer';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import SocialSidebar from './components/SocialSidebar';
 
-const App = () => {
+const AppContent = () => {
   const [loading, setLoading] = useState(() => !sessionStorage.getItem('portfolio-loaded'));
+  const { isDark } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -36,7 +39,7 @@ const App = () => {
   if (loading) {
     return (
       <motion.div
-        className="h-screen w-screen bg-[#050505] flex items-center justify-center"
+        className="flex h-screen w-screen items-center justify-center bg-background"
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
@@ -53,7 +56,7 @@ const App = () => {
             repeat: Infinity,
             repeatDelay: 1,
           }}
-          className="w-16 h-16 bg-gradient-to-tr from-brand-primary to-brand-secondary shadow-[0_0_30px_#A855F7]"
+          className="h-16 w-16 bg-gradient-to-tr from-brand-primary to-brand-secondary shadow-[var(--accent-glow)]"
         />
       </motion.div>
     );
@@ -68,24 +71,27 @@ const App = () => {
       }}
     >
       <ToastProvider>
-        <div className="bg-[#050505] min-h-screen text-white relative flex flex-col items-center selection:bg-brand-primary/30 selection:text-white">
-          <ParticlesBackground />
+        <div className="relative flex min-h-screen flex-col items-center bg-background text-foreground transition-colors duration-400">
+          <BackgroundLayer />
 
           <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary z-50 origin-left pointer-events-none"
+            className="pointer-events-none fixed top-0 left-0 right-0 z-50 h-1 origin-left bg-gradient-to-r from-brand-primary to-brand-secondary"
             style={{ scaleX }}
           />
 
-          <SplashCursor
-            COLOR="#A855F7"
-            SPLAT_RADIUS={0.2}
-            VELOCITY_DISSIPATION={2}
-            DENSITY_DISSIPATION={3.5}
-          />
+          {isDark && (
+            <SplashCursor
+              COLOR="#A855F7"
+              SPLAT_RADIUS={0.2}
+              VELOCITY_DISSIPATION={2}
+              DENSITY_DISSIPATION={3.5}
+            />
+          )}
 
           <Navbar />
+          <SocialSidebar />
 
-          <main className="relative z-10 w-full flex flex-col items-center">
+          <main className="relative z-10 flex w-full flex-col items-center">
             <Hero />
             <About />
             <Skills />
@@ -94,7 +100,7 @@ const App = () => {
             <Contact />
           </main>
 
-          <footer className="relative z-10 w-full py-8 text-center text-gray-500 text-sm border-t border-white/10 mt-12 bg-black/20">
+          <footer className="relative z-10 mt-12 w-full border-t border-border py-8 text-center text-sm text-muted bg-[var(--footer-bg)]">
             &copy; {new Date().getFullYear()} Sourabh Rawat. All Rights Reserved. Built with React & Tailwind.
           </footer>
         </div>
@@ -102,5 +108,11 @@ const App = () => {
     </ReactLenis>
   );
 };
+
+const App = () => (
+  <ThemeProvider>
+    <AppContent />
+  </ThemeProvider>
+);
 
 export default App;
