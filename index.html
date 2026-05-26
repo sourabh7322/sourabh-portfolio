@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#faf8fc" media="(prefers-color-scheme: light)" />
+    <script>
+      (function () {
+        var t = localStorage.getItem('portfolio-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     
     <!-- Primary SEO Metadata -->
     <title>Sourabh Rawat | Full-Stack Developer & UI/UX Designer</title>
@@ -30,10 +37,12 @@
     <meta name="twitter:description" content="Sourabh Rawat — Full-Stack Developer & UI/UX designer. React, Next.js & Node.js projects, skills, and contact. Based in Delhi, India." />
     <meta name="twitter:image" content="https://sourabhrawatportfolio.netlify.app/ProfileImage.jpeg" />
 
-    <!-- Google Font - Inter for clean premium typography & quick load speeds -->
+    <!-- Typography: Roboto (headings) + Satoshi (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
 
     <!-- Structured Data - Google Rich Snippets (JSON-LD Person Schema) -->
     <script type="application/ld+json">
@@ -46,8 +55,8 @@
         "url": "https://sourabhrawatportfolio.netlify.app/",
         "image": "https://sourabhrawatportfolio.netlify.app/ProfileImage.jpeg",
         "sameAs": [
-          "https://github.com/sourabhrawat",
-          "https://www.linkedin.com/in/sourabhrawat"
+          "https://github.com/sourabh7322",
+          "https://www.linkedin.com/in/sourabh-rawat-123a81194/"
         ],
         "knowsAbout": [
           "React",

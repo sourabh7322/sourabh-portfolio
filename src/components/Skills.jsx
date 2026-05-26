@@ -29,10 +29,10 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <div key={index}>
               <div className="flex justify-between mb-2">
-                <span className="text-white font-medium">{skill.name}</span>
-                <span className="text-gray-400">{skill.level}%</span>
+                <span className="text-foreground font-medium">{skill.name}</span>
+                <span className="text-muted">{skill.level}%</span>
               </div>
-              <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+              <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: `${skill.level}%` }}

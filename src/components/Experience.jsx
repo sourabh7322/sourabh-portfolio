@@ -38,17 +38,17 @@ const Experience = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="relative"
             >
-              <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-brand-primary shadow-[0_0_10px_#A855F7] border border-[#050505]" />
+              <div className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border border-background bg-brand-primary shadow-[var(--accent-glow)]" />
               
               <div className="glass-card p-6 rounded-2xl relative group hover:-translate-y-1 transition-transform">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
                   <span className="text-brand-secondary font-medium text-sm md:text-base bg-brand-secondary/10 px-3 py-1 rounded-full w-max mt-2 md:mt-0">
                     {exp.year}
                   </span>
                 </div>
-                <h4 className="text-gray-300 font-medium mb-3">{exp.company}</h4>
-                <p className="text-gray-400 leading-relaxed text-sm">
+                <h4 className="text-muted font-medium mb-3">{exp.company}</h4>
+                <p className="text-muted leading-relaxed text-sm">
                   {exp.description}
                 </p>
               </div>

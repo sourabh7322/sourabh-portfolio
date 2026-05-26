@@ -27,11 +27,11 @@ const About = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="w-full md:w-1/2"
       >
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary inline-block">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary inline-block">
           My Story
         </h2>
-        <h3 className="text-2xl text-gray-300 font-semibold mb-6">Building digital products that matter.</h3>
-        <div className="space-y-4 text-gray-400 leading-relaxed">
+        <h3 className="text-2xl text-muted font-semibold mb-6">Building digital products that matter.</h3>
+        <div className="space-y-4 text-muted leading-relaxed">
           <p>
             I&apos;m a passionate Full Stack Developer with a keen eye for modern design and robust architecture. 
             My journey into coding started with customizing themes and has grown into a full-fledged obsession with building scalable web applications.
@@ -46,11 +46,11 @@ const About = () => {
         
         <div className="mt-8 flex gap-8">
           <div>
-            <span className="block text-3xl font-bold text-white">1.5+</span>
+            <span className="block text-3xl font-bold text-foreground">1.5+</span>
             <span className="text-sm text-brand-primary">Years Experience</span>
           </div>
           <div>
-            <span className="block text-3xl font-bold text-white">40+</span>
+            <span className="block text-3xl font-bold text-foreground">40+</span>
             <span className="text-sm text-brand-secondary">Projects Done</span>
           </div>
         </div>
