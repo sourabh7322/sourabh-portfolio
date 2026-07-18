@@ -2,19 +2,18 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 
 const ThemeContext = createContext(null);
 
-const STORAGE_KEY = 'portfolio-theme';
+/** Default theme on every page load — never restored from storage. */
+const DEFAULT_THEME = 'dark';
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'dark';
-    return localStorage.getItem(STORAGE_KEY) || 'dark';
-  });
+  const [theme, setTheme] = useState(DEFAULT_THEME);
 
+  // Keep <html data-theme> in sync so CSS variables match the active theme.
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
+  // Flip between dark and light for the current session only.
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
