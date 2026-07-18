@@ -13,7 +13,7 @@ const ThemeToggle = ({ className = '' }) => {
       aria-label={isLight ? 'Switch to dark mode' : 'Switch to daylight mode'}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.94 }}
-      className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface/80 text-foreground backdrop-blur-md transition-colors hover:border-brand-primary/40 hover:bg-surface ${className}`}
+      className={`cursor-pointer relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface/80 text-foreground backdrop-blur-md transition-colors hover:border-brand-primary/40 hover:bg-surface ${className}`}
     >
       <motion.span
         key={theme}

@@ -7,34 +7,41 @@
     <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#faf8fc" media="(prefers-color-scheme: light)" />
     <script>
-      (function () {
-        var t = localStorage.getItem('portfolio-theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', t);
-      })();
+      // Always start in dark; ThemeToggle can switch to light for this session only.
+      document.documentElement.setAttribute('data-theme', 'dark');
     </script>
     
     <!-- Primary SEO Metadata -->
-    <title>Sourabh Rawat | Full-Stack Developer & UI/UX Designer</title>
-    <meta name="description" content="Sourabh Rawat — Full-Stack Developer & UI/UX designer. React, Next.js & Node.js projects, skills, and contact. Based in Delhi, India." />
-    <meta name="keywords" content="Sourabh Rawat, Sourabh Rawat developer, Sourabh Rawat Portfolio, Sourabh Rawat React Developer, Full Stack Developer portfolio, Web Designer portfolio, NextJS developer, Software Engineer Delhi" />
+    <title>Sourabh Rawat Portfolio | Full Stack Developer</title>
+    <meta name="description" content="Official portfolio of Sourabh Rawat, a Full Stack Developer specializing in React, Next.js, Node.js, NestJS, TypeScript & PostgreSQL. View projects & contact." />
+    <meta name="keywords" content="Sourabh Rawat, Sourabh Rawat Portfolio, Sourabh Rawat Developer, Full Stack Developer, React Developer, Next.js Developer, Node.js Developer, NestJS Developer, TypeScript Developer, Software Engineer India" />
     <meta name="author" content="Sourabh Rawat" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://sourabhrawatportfolio.netlify.app/" />
+
+    <!-- App / Device Metadata -->
+    <meta name="application-name" content="Sourabh Rawat Portfolio" />
+    <meta name="apple-mobile-web-app-title" content="Sourabh Rawat" />
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Open Graph / Facebook Previews -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Sourabh Rawat Portfolio" />
     <meta property="og:url" content="https://sourabhrawatportfolio.netlify.app/" />
-    <meta property="og:title" content="Sourabh Rawat | Full-Stack Developer & UI/UX Designer" />
-    <meta property="og:description" content="Sourabh Rawat — Full-Stack Developer & UI/UX designer. React, Next.js & Node.js projects, skills, and contact. Based in Delhi, India." />
+    <meta property="og:title" content="Sourabh Rawat | Full Stack Developer" />
+    <meta property="og:description" content="Explore the portfolio of Sourabh Rawat, a Full Stack Developer building scalable React, Next.js, Node.js, NestJS & TypeScript applications." />
     <meta property="og:image" content="https://sourabhrawatportfolio.netlify.app/ProfileImage.jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sourabh Rawat - Full Stack Developer" />
 
     <!-- Twitter Previews -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://sourabhrawatportfolio.netlify.app/" />
-    <meta name="twitter:title" content="Sourabh Rawat | Full-Stack Developer & UI/UX Designer" />
-    <meta name="twitter:description" content="Sourabh Rawat — Full-Stack Developer & UI/UX designer. React, Next.js & Node.js projects, skills, and contact. Based in Delhi, India." />
+    <meta name="twitter:title" content="Sourabh Rawat | Full Stack Developer" />
+    <meta name="twitter:description" content="Official portfolio of Sourabh Rawat featuring React, Next.js, Node.js, NestJS & TypeScript projects." />
     <meta name="twitter:image" content="https://sourabhrawatportfolio.netlify.app/ProfileImage.jpeg" />
 
     <!-- Typography: Roboto (headings) + Satoshi (body) -->
@@ -44,16 +51,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
 
-    <!-- Structured Data - Google Rich Snippets (JSON-LD Person Schema) -->
+    <!-- Structured Data - Person (Google Rich Snippets) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://sourabhrawatportfolio.netlify.app/#person",
         "name": "Sourabh Rawat",
+        "givenName": "Sourabh",
+        "familyName": "Rawat",
         "alternateName": "Sourabh Rawat Developer",
-        "jobTitle": "Full-Stack Web Developer & Software Engineer",
         "url": "https://sourabhrawatportfolio.netlify.app/",
         "image": "https://sourabhrawatportfolio.netlify.app/ProfileImage.jpeg",
+        "jobTitle": "Full Stack Developer",
+        "description": "Full Stack Developer specializing in React, Next.js, Node.js, NestJS, TypeScript, PostgreSQL, and modern web technologies.",
+        "nationality": "Indian",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Creware Technologies Pvt. Ltd."
+        },
         "sameAs": [
           "https://github.com/sourabh7322",
           "https://www.linkedin.com/in/sourabh-rawat-123a81194/"
@@ -62,18 +78,31 @@
           "React",
           "Next.js",
           "Node.js",
-          "Express.js",
-          "Python",
+          "NestJS",
           "TypeScript",
-          "Tailwind CSS",
-          "Framer Motion",
-          "MongoDB",
+          "JavaScript",
           "PostgreSQL",
-          "WebGL",
-          "Web Development",
-          "UI/UX Design"
-        ],
-        "description": "Full-Stack Developer and UI/UX designer building React, Next.js, and Node.js web applications."
+          "MongoDB",
+          "Express.js",
+          "Tailwind CSS",
+          "REST APIs",
+          "Web Development"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sourabh Rawat Portfolio",
+        "url": "https://sourabhrawatportfolio.netlify.app/",
+        "author": {
+          "@type": "Person",
+          "@id": "https://sourabhrawatportfolio.netlify.app/#person",
+          "name": "Sourabh Rawat"
+        }
       }
     </script>
   </head>

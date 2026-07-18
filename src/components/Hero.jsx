@@ -71,14 +71,24 @@ const Hero = () => {
           Hi, I&apos;m <span className="text-gradient bg-gradient-to-r from-brand-primary to-brand-secondary">Sourabh Rawat</span>
         </motion.h1>
 
-        <motion.div 
+        {/* Real, crawlable role heading — helps Google tie "Sourabh Rawat" to Full Stack Developer + tech stack */}
+        <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-10 h-10 text-xl font-medium text-muted md:text-3xl"
+          className="mb-3 h-10 text-xl font-medium text-muted md:text-3xl"
         >
           I am a <TypingEffect words={['Full Stack Developer.', 'UI/UX Enthusiast.', 'Problem Solver.']} />
-        </motion.div>
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mb-10 max-w-2xl text-sm text-muted/80 md:text-base"
+        >
+          Full Stack Developer specializing in React, Next.js, Node.js, NestJS, TypeScript &amp; PostgreSQL.
+        </motion.p>
 
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
