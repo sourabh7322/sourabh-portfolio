@@ -4,6 +4,20 @@ import { useTheme } from '../context/ThemeContext';
 
 const projects = [
   {
+    title: 'JARVIS',
+    description:
+      'A voice + text personal AI dashboard with live web search, RAG memory, and Graphify token compression. Built with Next.js, FastAPI, and OpenRouter — streaming replies in real time with weather, system control, and a glassmorphic command-center UI.',
+    image: '/Project/Project-4.jpeg',
+    live: 'https://jarvisautomated.netlify.app/',
+    theme: {
+      leftBg: 'bg-gradient-to-br from-[#0A1628] to-[#050B14]',
+      rightBg: 'bg-gradient-to-br from-[#0E7490] to-[#164E63]',
+      lightLeftBg: 'bg-gradient-to-br from-[#ecfeff] to-[#cffafe]',
+      lightRightBg: 'bg-gradient-to-br from-[#e0f2fe] to-[#bae6fd]',
+      accentColor: '#22D3EE',
+    },
+  },
+  {
     title: 'Knowledge Knook',
     description:
       'A robust edu-tech platform for creating, consuming, and rating educational content. Built with the MERN stack — React, Node.js, Express, and MongoDB — with a full ecosystem for learners to explore resources and collaborate.',

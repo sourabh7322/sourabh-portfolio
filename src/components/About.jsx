@@ -13,9 +13,9 @@ const About = () => {
         <div className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-brand-primary to-brand-secondary opacity-30 blur-2xl rounded-full" />
           <img 
-            src="/ProfileImage.jpeg" 
+            src="/Sourabh_Profile.png" 
             alt="Sourabh Rawat - Full Stack Web Developer & UI/UX Designer Profile" 
-            className="relative rounded-2xl w-full h-[400px] object-cover border border-white/10"
+            className="relative rounded-2xl w-full h-[600px] object-cover border border-white/10"
           />
         </div>
       </motion.div>
