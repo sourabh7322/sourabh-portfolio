@@ -14,9 +14,11 @@ import BackgroundLayer from './components/BackgroundLayer';
 import { ToastProvider } from './context/ToastContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import SocialSidebar from './components/SocialSidebar';
+import GojoCharacter from './components/GojoCharacter';
+import { preloadGreeting } from './utils/portfolioGreeting';
 
 const AppContent = () => {
-  const [loading, setLoading] = useState(() => !sessionStorage.getItem('portfolio-loaded'));
+  const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -26,15 +28,11 @@ const AppContent = () => {
   });
 
   useEffect(() => {
-    if (!loading) return undefined;
+    preloadGreeting();
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-      sessionStorage.setItem('portfolio-loaded', '1');
-    }, 2000);
-
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
-  }, [loading]);
+  }, []);
 
   if (loading) {
     return (
@@ -90,6 +88,7 @@ const AppContent = () => {
 
           <Navbar />
           <SocialSidebar />
+          <GojoCharacter />
 
           <main className="relative z-10 flex w-full flex-col items-center">
             <Hero />
