@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Experience', href: '#experience' },
 ];
 
-const RESUME_URL = '/CV/Sourabh_Resume_26.pdf';
+const RESUME_URL = '/CV/Sourabh_Rawat_10_Aug.pdf';
 const RESUME_FILENAME = 'Sourabh_Rawat_Resume.pdf';
 
 const Navbar = () => {

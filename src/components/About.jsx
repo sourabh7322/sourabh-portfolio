@@ -13,7 +13,7 @@ const About = () => {
         <div className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-brand-primary to-brand-secondary opacity-30 blur-2xl rounded-full" />
           <img 
-            src="/Sourabh_Profile.png" 
+            src="/Sourabh_Portfolio_Image.png" 
             alt="Sourabh Rawat - Full Stack Web Developer & UI/UX Designer Profile" 
             className="relative rounded-2xl w-full h-[600px] object-cover border border-white/10"
           />
@@ -46,11 +46,11 @@ const About = () => {
         
         <div className="mt-8 flex gap-8">
           <div>
-            <span className="block text-3xl font-bold text-foreground">1.5+</span>
+            <span className="block text-3xl font-bold text-foreground">1.7+</span>
             <span className="text-sm text-brand-primary">Years Experience</span>
           </div>
           <div>
-            <span className="block text-3xl font-bold text-foreground">40+</span>
+            <span className="block text-3xl font-bold text-foreground">10+</span>
             <span className="text-sm text-brand-secondary">Projects Done</span>
           </div>
         </div>
